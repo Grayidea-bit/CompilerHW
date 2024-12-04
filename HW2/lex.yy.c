@@ -362,8 +362,8 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[16] =
     {   0,
-        0,    0,   12,   10,    8,    9,    6,    7,    4,    3,
-        1,    5,    2,    2,    0
+        0,    0,   12,   10,    8,    9,    6,    7,    4,    2,
+        3,    5,    1,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -405,8 +405,8 @@ static const YY_CHAR yy_meta[11] =
 
 static const flex_int16_t yy_base[16] =
     {   0,
-        0,    0,   14,   15,   15,   15,   15,   15,   15,   15,
-        3,   15,    2,    1,   15
+        0,    0,   13,   14,   14,   14,   14,   14,   14,   14,
+       14,   14,    2,    1,   14
     } ;
 
 static const flex_int16_t yy_def[16] =
@@ -415,18 +415,18 @@ static const flex_int16_t yy_def[16] =
        15,   15,   15,   15,    0
     } ;
 
-static const flex_int16_t yy_nxt[26] =
+static const flex_int16_t yy_nxt[25] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
-       14,   14,   14,   15,    3,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15
+       14,   14,   15,    3,   15,   15,   15,   15,   15,   15,
+       15,   15,   15,   15
     } ;
 
-static const flex_int16_t yy_chk[26] =
+static const flex_int16_t yy_chk[25] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-       14,   13,   11,    3,   15,   15,   15,   15,   15,   15,
-       15,   15,   15,   15,   15
+       14,   13,    3,   15,   15,   15,   15,   15,   15,   15,
+       15,   15,   15,   15
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -666,7 +666,8 @@ YY_DECL
 	{
 #line 5 "test.l"
 
-#line 670 "lex.yy.c"
+
+#line 671 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -699,7 +700,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 15 );
+		while ( yy_base[yy_current_state] != 14 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -725,66 +726,68 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 6 "test.l"
-{ return Minus; }
-	YY_BREAK
-case 2:
-YY_RULE_SETUP
 #line 7 "test.l"
 {
             yylval.intValue = atoi(yytext); // Convert string to integer
             return Realnumber;
          }
 	YY_BREAK
-case 3:
+case 2:
 YY_RULE_SETUP
 #line 11 "test.l"
 { return Plus; }
 	YY_BREAK
-case 4:
+case 3:
 YY_RULE_SETUP
 #line 12 "test.l"
+{ return Minus; }
+	YY_BREAK
+case 4:
+YY_RULE_SETUP
+#line 13 "test.l"
 { return Mult; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 13 "test.l"
+#line 14 "test.l"
 { return Div; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 14 "test.l"
+#line 15 "test.l"
 { return Left; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 15 "test.l"
+#line 16 "test.l"
 { return Right; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 16 "test.l"
+#line 17 "test.l"
 { /* Ignore whitespace */ }
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 17 "test.l"
+#line 18 "test.l"
+{ return '\n'; }
+	YY_BREAK
+case YY_STATE_EOF(INITIAL):
+#line 19 "test.l"
 { return '\n'; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 18 "test.l"
+#line 20 "test.l"
 { printf("Unknown character: %s\n", yytext); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 20 "test.l"
+#line 22 "test.l"
 ECHO;
 	YY_BREAK
-#line 786 "lex.yy.c"
-case YY_STATE_EOF(INITIAL):
-	yyterminate();
+#line 791 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1787,7 +1790,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 20 "test.l"
+#line 22 "test.l"
 
 int yywrap() {
     return 1;
