@@ -21,7 +21,7 @@
 statement :
     /* empty */
 	| expression '\n' statement
-    | expression statement
+    | expression 
 	;		
 
 expression :

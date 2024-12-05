@@ -1,8 +1,8 @@
    0  $accept : statement $end
 
    1  statement :
-   2            | statement expression
-   3            | statement expression '\n'
+   2            | expression '\n' statement
+   3            | expression
 
    4  expression : expression Plus factor
    5             | expression Minus factor
@@ -13,57 +13,47 @@
    9         | primary
 
   10  primary : Realnumber
-  11          | Left expression Right
-  12          | Minus primary
+  11          | Minus primary
+  12          | Left expression Right
 
 state 0
 	$accept : . statement $end  (0)
 	statement : .  (1)
 
-	.  reduce 1
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
+	$end  reduce 1
 
-	statement  goto 1
-
-
-state 1
-	$accept : statement . $end  (0)
-	statement : statement . expression  (2)
-	statement : statement . expression '\n'  (3)
-
-	$end  accept
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
-	.  error
-
+	statement  goto 4
 	expression  goto 5
 	factor  goto 6
 	primary  goto 7
 
 
-state 2
+state 1
 	primary : Realnumber .  (10)
 
 	.  reduce 10
 
 
-state 3
-	primary : Minus . primary  (12)
+state 2
+	primary : Minus . primary  (11)
 
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
 	.  error
 
 	primary  goto 8
 
 
-state 4
-	primary : Left . expression Right  (11)
+state 3
+	primary : Left . expression Right  (12)
 
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
 	.  error
 
 	expression  goto 9
@@ -71,19 +61,22 @@ state 4
 	primary  goto 7
 
 
-5: shift/reduce conflict (shift 11, reduce 2) on Minus
+state 4
+	$accept : statement . $end  (0)
+
+	$end  accept
+
+
 state 5
-	statement : statement expression .  (2)
-	statement : statement expression . '\n'  (3)
+	statement : expression . '\n' statement  (2)
+	statement : expression .  (3)
 	expression : expression . Plus factor  (4)
 	expression : expression . Minus factor  (5)
 
 	Plus  shift 10
 	Minus  shift 11
 	'\n'  shift 12
-	$end  reduce 2
-	Realnumber  reduce 2
-	Left  reduce 2
+	$end  reduce 3
 
 
 state 6
@@ -94,10 +87,8 @@ state 6
 	Mult  shift 13
 	Div  shift 14
 	$end  reduce 6
-	Realnumber  reduce 6
 	Plus  reduce 6
 	Minus  reduce 6
-	Left  reduce 6
 	Right  reduce 6
 	'\n'  reduce 6
 
@@ -109,15 +100,15 @@ state 7
 
 
 state 8
-	primary : Minus primary .  (12)
+	primary : Minus primary .  (11)
 
-	.  reduce 12
+	.  reduce 11
 
 
 state 9
 	expression : expression . Plus factor  (4)
 	expression : expression . Minus factor  (5)
-	primary : Left expression . Right  (11)
+	primary : Left expression . Right  (12)
 
 	Plus  shift 10
 	Minus  shift 11
@@ -128,9 +119,9 @@ state 9
 state 10
 	expression : expression Plus . factor  (4)
 
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
 	.  error
 
 	factor  goto 16
@@ -140,9 +131,9 @@ state 10
 state 11
 	expression : expression Minus . factor  (5)
 
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
 	.  error
 
 	factor  goto 17
@@ -150,37 +141,46 @@ state 11
 
 
 state 12
-	statement : statement expression '\n' .  (3)
+	statement : expression '\n' . statement  (2)
+	statement : .  (1)
 
-	.  reduce 3
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
+	$end  reduce 1
+
+	statement  goto 18
+	expression  goto 5
+	factor  goto 6
+	primary  goto 7
 
 
 state 13
 	factor : factor Mult . primary  (7)
 
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
-	.  error
-
-	primary  goto 18
-
-
-state 14
-	factor : factor Div . primary  (8)
-
-	Realnumber  shift 2
-	Minus  shift 3
-	Left  shift 4
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
 	.  error
 
 	primary  goto 19
 
 
-state 15
-	primary : Left expression Right .  (11)
+state 14
+	factor : factor Div . primary  (8)
 
-	.  reduce 11
+	Realnumber  shift 1
+	Minus  shift 2
+	Left  shift 3
+	.  error
+
+	primary  goto 20
+
+
+state 15
+	primary : Left expression Right .  (12)
+
+	.  reduce 12
 
 
 state 16
@@ -191,10 +191,8 @@ state 16
 	Mult  shift 13
 	Div  shift 14
 	$end  reduce 4
-	Realnumber  reduce 4
 	Plus  reduce 4
 	Minus  reduce 4
-	Left  reduce 4
 	Right  reduce 4
 	'\n'  reduce 4
 
@@ -207,31 +205,32 @@ state 17
 	Mult  shift 13
 	Div  shift 14
 	$end  reduce 5
-	Realnumber  reduce 5
 	Plus  reduce 5
 	Minus  reduce 5
-	Left  reduce 5
 	Right  reduce 5
 	'\n'  reduce 5
 
 
 state 18
+	statement : expression '\n' statement .  (2)
+
+	.  reduce 2
+
+
+state 19
 	factor : factor Mult primary .  (7)
 
 	.  reduce 7
 
 
-state 19
+state 20
 	factor : factor Div primary .  (8)
 
 	.  reduce 8
 
 
-State 5 contains 1 shift/reduce conflict.
-
-
 11 terminals, 5 nonterminals
-13 grammar rules, 20 states
+13 grammar rules, 21 states
 
 grammar parser grammar
 symbol# value# symbol

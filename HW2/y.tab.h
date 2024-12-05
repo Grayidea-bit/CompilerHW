@@ -8,6 +8,7 @@
 #define Div 261
 #define Left 262
 #define Right 263
+#define UMINUS 264
 #ifdef YYSTYPE
 #undef  YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1

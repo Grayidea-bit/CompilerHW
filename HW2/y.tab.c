@@ -20,7 +20,7 @@
 
 #define YYPURE 0
 
-#line 2 "ltest.y"
+#line 2 "test.y"
     #include<stdio.h>
     #include<stdlib.h> /* Required for atof*/
     void yyerror(char *msg);
@@ -31,7 +31,7 @@
 #endif
 #ifndef YYSTYPE_IS_DECLARED
 #define YYSTYPE_IS_DECLARED 1
-#line 8 "ltest.y"
+#line 8 "test.y"
 typedef union YYSTYPE {
     int intValue; /* Integer type for numbers*/
 } YYSTYPE;
@@ -80,6 +80,7 @@ extern int YYPARSE_DECL();
 #define Div 261
 #define Left 262
 #define Right 263
+#define UMINUS 264
 #define YYERRCODE 256
 typedef int YYINT;
 static const YYINT yylhs[] = {                           -1,
@@ -91,25 +92,25 @@ static const YYINT yylen[] = {                            2,
     2,    3,
 };
 static const YYINT yydefred[] = {                         0,
-   10,    0,    0,    0,    0,    0,    0,   11,    0,    0,
-    0,    0,    0,    0,   12,    2,    4,    5,    7,    8,
+   10,    0,    0,    0,    0,    0,    9,   11,    0,    0,
+    0,    0,    0,    0,   12,    0,    0,    2,    7,    8,
 };
 #if defined(YYDESTRUCT_CALL) || defined(YYSTYPE_TOSTRING)
 static const YYINT yystos[] = {                           0,
-  257,  259,  262,  265,  266,  267,  268,  268,  266,   10,
-  258,  259,  260,  261,  263,  265,  266,  266,  267,  267,
+  257,  259,  262,  266,  267,  268,  269,  269,  267,  258,
+  259,   10,  260,  261,  263,  268,  268,  266,  269,  269,
 };
 #endif /* YYDESTRUCT_CALL || YYSTYPE_TOSTRING */
 static const YYINT yydgoto[] = {                          4,
     5,    6,    7,
 };
 static const YYINT yysindex[] = {                      -252,
-    0, -252, -252,    0,   -4, -255, -247,    0, -248, -252,
- -252, -252, -252, -252,    0,    0,    0,    0,    0,    0,
+    0, -252, -252,    0,  -10, -240,    0,    0, -241, -252,
+ -252, -252, -252, -252,    0, -240, -240,    0,    0,    0,
 };
-static const YYINT yyrindex[] = {                        18,
-    0,    0,    0,    0,   19,    2,    1,    0,    0,   18,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+static const YYINT yyrindex[] = {                         6,
+    0,    0,    0,    0,    8,    1,    0,    0,    0,    0,
+    0,    6,    0,    0,    0,    3,    9,    0,    0,    0,
 };
 #if YYBTYACC
 static const YYINT yycindex[] = {                         0,
@@ -117,14 +118,14 @@ static const YYINT yycindex[] = {                         0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
 };
 #endif
-static const YYINT yygindex[] = {                        10,
-   -3,    3,   20,
+static const YYINT yygindex[] = {                        14,
+   -1,   13,    2,
 };
-#define YYTABLESIZE 265
-static const YYINT yytable[] = {                          9,
-    9,    6,   11,   12,    1,   10,    2,   17,   18,    3,
-    9,    6,   13,   14,   15,   19,   20,    1,    3,   16,
-    0,    8,    0,    0,    0,    0,    0,    0,    0,    0,
+#define YYTABLESIZE 272
+static const YYINT yytable[] = {                         12,
+    6,    9,    4,    8,    1,    1,    2,    3,    5,    3,
+    6,    0,    4,    0,   19,   20,   10,   11,    5,   13,
+   14,   15,   16,   17,    0,   18,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -146,14 +147,15 @@ static const YYINT yytable[] = {                          9,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    9,    9,
-    0,    0,    0,    9,    6,
+    0,    0,    0,    0,    0,    0,    0,   10,   11,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    6,    6,
+    4,    4,    0,    6,    0,    4,    5,    5,    0,    0,
+    0,    5,
 };
-static const YYINT yycheck[] = {                          3,
-    0,    0,  258,  259,  257,   10,  259,   11,   12,  262,
-   10,   10,  260,  261,  263,   13,   14,    0,    0,   10,
-   -1,    2,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+static const YYINT yycheck[] = {                         10,
+    0,    3,    0,    2,  257,    0,  259,    0,    0,  262,
+   10,   -1,   10,   -1,   13,   14,  258,  259,   10,  260,
+  261,  263,   10,   11,   -1,   12,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -175,9 +177,10 @@ static const YYINT yycheck[] = {                          3,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,  258,  259,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,  258,  259,
-   -1,   -1,   -1,  263,  263,
+  258,  259,   -1,  263,   -1,  263,  258,  259,   -1,   -1,
+   -1,  263,
 };
 #if YYBTYACC
 static const YYINT yyctable[] = {                        -1,
@@ -207,15 +210,16 @@ static const YYINT yyctable[] = {                        -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,
 };
 #endif
 #define YYFINAL 4
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
-#define YYMAXTOKEN 263
-#define YYUNDFTOKEN 269
+#define YYMAXTOKEN 264
+#define YYUNDFTOKEN 270
 #define YYTRANSLATE(a) ((a) > YYMAXTOKEN ? YYUNDFTOKEN : (a))
 #if YYDEBUG
 static const char *const yyname[] = {
@@ -227,19 +231,19 @@ static const char *const yyname[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"error","Realnumber","Plus","Minus",
-"Mult","Div","Left","Right","$accept","statement","expression","factor",
-"primary","illegal-symbol",
+"Mult","Div","Left","Right","UMINUS","$accept","statement","expression",
+"factor","primary","illegal-symbol",
 };
 static const char *const yyrule[] = {
 "$accept : statement",
 "statement :",
 "statement : expression '\\n' statement",
 "statement : expression",
-"expression : factor Plus expression",
-"expression : factor Minus expression",
+"expression : expression Plus factor",
+"expression : expression Minus factor",
 "expression : factor",
-"factor : primary Mult factor",
-"factor : primary Div factor",
+"factor : factor Mult primary",
+"factor : factor Div primary",
 "factor : primary",
 "primary : Realnumber",
 "primary : Minus primary",
@@ -375,7 +379,7 @@ static YYINT  *yylexp = 0;
 
 static YYINT  *yylexemes = 0;
 #endif /* YYBTYACC */
-#line 52 "ltest.y"
+#line 55 "test.y"
 
 int main() {
     yyparse();
@@ -385,7 +389,7 @@ int main() {
 void yyerror(char *msg) {
     printf("Error: %s\n", msg);
 }
-#line 389 "y.tab.c"
+#line 393 "y.tab.c"
 
 /* For use in generated program */
 #define yydepth (int)(yystack.s_mark - yystack.s_base)
@@ -1056,51 +1060,51 @@ yyreduce:
     switch (yyn)
     {
 case 4:
-#line 26 "ltest.y"
+#line 29 "test.y"
 	{ yyval.intValue = yystack.l_mark[-2].intValue + yystack.l_mark[0].intValue; printf("%d add %d is %d\n", yystack.l_mark[-2].intValue, yystack.l_mark[0].intValue, yyval.intValue); }
-#line 1062 "y.tab.c"
+#line 1066 "y.tab.c"
 break;
 case 5:
-#line 28 "ltest.y"
+#line 31 "test.y"
 	{ yyval.intValue = yystack.l_mark[-2].intValue - yystack.l_mark[0].intValue; printf("%d cut %d is %d\n", yystack.l_mark[-2].intValue, yystack.l_mark[0].intValue, yyval.intValue); }
-#line 1067 "y.tab.c"
+#line 1071 "y.tab.c"
 break;
 case 6:
-#line 30 "ltest.y"
+#line 33 "test.y"
 	{ yyval.intValue = yystack.l_mark[0].intValue; }
-#line 1072 "y.tab.c"
+#line 1076 "y.tab.c"
 break;
 case 7:
-#line 35 "ltest.y"
+#line 38 "test.y"
 	{ yyval.intValue = yystack.l_mark[-2].intValue * yystack.l_mark[0].intValue; printf("%d mult %d is %d\n", yystack.l_mark[-2].intValue, yystack.l_mark[0].intValue, yyval.intValue); }
-#line 1077 "y.tab.c"
+#line 1081 "y.tab.c"
 break;
 case 8:
-#line 37 "ltest.y"
+#line 40 "test.y"
 	{ yyval.intValue = yystack.l_mark[-2].intValue / yystack.l_mark[0].intValue; printf("%d div %d is %d\n", yystack.l_mark[-2].intValue, yystack.l_mark[0].intValue, yyval.intValue); }
-#line 1082 "y.tab.c"
+#line 1086 "y.tab.c"
 break;
 case 9:
-#line 39 "ltest.y"
+#line 42 "test.y"
 	{ yyval.intValue = yystack.l_mark[0].intValue; }
-#line 1087 "y.tab.c"
+#line 1091 "y.tab.c"
 break;
 case 10:
-#line 44 "ltest.y"
+#line 47 "test.y"
 	{ yyval.intValue = yystack.l_mark[0].intValue; }
-#line 1092 "y.tab.c"
+#line 1096 "y.tab.c"
 break;
 case 11:
-#line 46 "ltest.y"
+#line 49 "test.y"
 	{ yyval.intValue = -yystack.l_mark[0].intValue; printf("neg %d is %d\n", yystack.l_mark[0].intValue, yyval.intValue); }
-#line 1097 "y.tab.c"
+#line 1101 "y.tab.c"
 break;
 case 12:
-#line 48 "ltest.y"
+#line 51 "test.y"
 	{ yyval.intValue = yystack.l_mark[-1].intValue; }
-#line 1102 "y.tab.c"
+#line 1106 "y.tab.c"
 break;
-#line 1104 "y.tab.c"
+#line 1108 "y.tab.c"
     default:
         break;
     }

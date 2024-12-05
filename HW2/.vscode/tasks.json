@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc build active file",
+            "command": "/usr/bin/g++-11", // 修改為 g++-11
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-std=c++11", // 指定 C++11 標準（可根據需要更改）
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Generated task by Debugger."
+        }
+    ]
+}
